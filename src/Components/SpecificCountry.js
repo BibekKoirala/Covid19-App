@@ -12,7 +12,8 @@ class SpecificCountry extends Component {
     
         this.state = {
              countrySlug : "",
-             countryDataFromDayOne: []
+             countryDataFromDayOne: [],
+             countryName : ""
         }
     }
     
@@ -29,7 +30,8 @@ class SpecificCountry extends Component {
         Axios.get(`https://api.covid19api.com/dayone/country/${this.state.countrySlug}`)
         .then(response=>{
             this.setState({
-                countryDataFromDayOne : response.data
+                countryDataFromDayOne : response.data,
+                countryName : response.data[0].Country
             })
         })
         .catch(error=>{
@@ -43,11 +45,19 @@ class SpecificCountry extends Component {
             return <OneDayCountry OneDayInfo = {info} day={index+1} key={info.Date.slice(0,10)}/> 
         })
 
+        const forNepal = ()=>{
+            if(this.props.country === 'nepal'){
+                return <Link to="/nepal/district"><button>View By District</button></Link>
+            }
+        };
+
+
         return (
         <div className="App">
         <Link to="/"><button>All Countries</button></Link>
+        {forNepal()}
         <br />
-        <br />
+        <h3>Data of {this.state.countryName}</h3>
         <table className={TableStyle.table2}>
             <thead>
             <tr>
