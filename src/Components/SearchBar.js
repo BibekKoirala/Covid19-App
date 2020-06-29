@@ -15,7 +15,6 @@ class SearchBar extends Component {
         this.setState({
             letters : event.target.value
         }, ()=>{
-            console.log(this.state.letters)
                 this.props.search(this.state.letters);
         })
 
@@ -32,7 +31,7 @@ class SearchBar extends Component {
                  value={this.state.letters}
                  onChange={ this.changeHandler } 
                  ref={this.ref}
-                 placeholder="Country"></input>
+                 placeholder={ this.props.searchFor}></input>
             </div>
         );
     }

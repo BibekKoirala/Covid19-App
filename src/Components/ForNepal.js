@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import TableStyle from './Stylesheets/table.module.css'
 import ForDistrict from './ComponentForNepal/ForDistrict'
+import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 
 class ForNepal extends Component {
@@ -10,7 +12,8 @@ class ForNepal extends Component {
         super(props)
     
         this.state = {
-             allDistrictData : []
+             allDistrictData : [],
+             permanentData : []
         }
     }
 
@@ -38,13 +41,28 @@ class ForNepal extends Component {
             }
 
             this.setState({
-                allDistrictData : list
+                allDistrictData : list,
+                permanentData : list
             });
         })
         .catch(error=>{
             console.log(error)
         })
     }
+
+    filterByDistrict=(letters)=>{
+        var newList =[]
+        this.setState({
+          allDistrictData : this.state.permanentData
+        },()=>{
+          newList = this.state.allDistrictData.filter((district)=>{
+            return district.title.includes(letters)
+          })
+          this.setState({
+            allDistrictData : newList
+          })
+        })
+      }
     
     render() {
 
@@ -54,6 +72,10 @@ class ForNepal extends Component {
 
         return (
             <div className="App">
+                <Link to="/" ><button>All Country</button></Link>
+                <h3>Information Of Districts Of Nepal</h3>       
+                <SearchBar search={ this.filterByDistrict } searchFor="District"  />     
+                <br /> 
                  <table className={TableStyle.table}>
                 <thead>
                 <tr>

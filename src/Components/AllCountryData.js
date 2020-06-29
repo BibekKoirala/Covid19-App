@@ -20,7 +20,6 @@ class AllCountryData extends React.Component {
   }
 
   filterByCountry=(letters)=>{
-
     var newList =[]
     this.setState({
       forEachCountry : this.state.permanentData
@@ -58,7 +57,7 @@ class AllCountryData extends React.Component {
 
       <TotalInfo data = {this.state.forWorld}/>
       <br />
-      <SearchBar search = { this.filterByCountry } />
+      <SearchBar search = { this.filterByCountry } searchFor="Country"/>
       <br />
       <table className={TableStyle.table}>
       <thead>

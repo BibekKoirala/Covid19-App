@@ -13,6 +13,24 @@ class DataOfIndividuals extends Component {
         }
     }
     
+    static getDerivedStateFromProps(prop,state){
+        if(prop.covidInfo.currentState === "active"){
+            return{
+                active : true 
+            }
+        }
+        else if(prop.covidInfo.currentState === "recovered"){
+            return{
+                recovered : true
+            }
+        }
+        else if(prop.covidInfo.currentState === "death"){
+            return{
+                death : true
+            }
+        }
+    }
+
 
 
     render() {
